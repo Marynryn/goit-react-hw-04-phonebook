@@ -1,0 +1,17 @@
+.contact{
+    font-size: 30px;
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+.button_delete{
+    display: block;
+    padding: 10px 25px;
+    border-radius: 10%;
+    background-color: rgb(30, 210, 99);
+    margin: 0 0 0 15px;
+}
+.list{
+    padding-inline-start:0;
+}
