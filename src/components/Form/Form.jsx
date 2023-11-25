@@ -1,73 +1,70 @@
-import React from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import css from '../Form/Form.module.css';
 
-class Form extends React.Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export default function Form({ onSubmit }) {
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
 
-  nameId = nanoid();
-  numberId = nanoid();
-  handleNameChange = event => {
-    this.setState({ name: event.target.value });
+  const nameId = nanoid();
+  const numberId = nanoid();
+  const handleNameChange = event => {
+    setName(event.target.value);
   };
-  handleNumberChange = event => {
-    this.setState({ number: event.target.value });
+  const handleNumberChange = event => {
+    setNumber(event.target.value);
   };
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const { name, number } = this.state;
-    this.props.onSubmit(name, number);
-    this.reset();
+
+
+    onSubmit(name, number);
+    reset();
   };
 
-  reset = () => {
-    this.setState({
-      name: '',
-      number: '',
-    });
+  const reset = () => {
+    setNumber("");
+    setName("")
   };
-  render() {
-    return (
-      <div>
-        <div className="form">
-          <form className={css.form_phonebook} onSubmit={this.handleSubmit}>
-            <label htmlFor={this.nameId} className={css.label}>
-              <h2 className={css.form_name}>Name</h2>
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleNameChange}
-                pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                required
-                id={this.nameId}
-              />
-            </label>
-            <label htmlFor={this.numberId} className={css.label_number}>
-              <h2 className={css.form_number}>Number</h2>
-              <input
-                type="tel"
-                name="number"
-                pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                value={this.state.number}
-                onChange={this.handleNumberChange}
-                id={this.numberId}
-                required
-              />
-            </label>
-            <button className="button_submit" type="submit">
-              Add contact
-            </button>
-          </form>
-        </div>
+
+  return (
+    <div>
+      <div className="form">
+        <form className={css.form_phonebook} onSubmit={handleSubmit}>
+          <label htmlFor={nameId} className={css.label}>
+            <h2 className={css.form_name}>Name</h2>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              id={nameId}
+            />
+          </label>
+          <label htmlFor={numberId} className={css.label_number}>
+            <h2 className={css.form_number}>Number</h2>
+            <input
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              value={number}
+              onChange={handleNumberChange}
+              id={numberId}
+              required
+            />
+          </label>
+          <button className="button_submit" type="submit">
+            Add contact
+          </button>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Form;
+
+
